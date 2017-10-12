@@ -40,10 +40,11 @@ This program seeks to:
     - [x] t/f
     - [x] 1/0
     - [x] 1.0/0.0
-  - [ ] Strings
-    - [ ] Alpha
-    - [ ] Alphanumeric
-    - [ ] Extended
+  - [x] Strings
+    - [x] Alpha
+    - [x] Alphanumeric
+    - [x] ASCII
+    - [x] UTF-8
 
 ### License
 Copyright 2017 Bryan T. Meyers <bmeyers@datadrake.com>
