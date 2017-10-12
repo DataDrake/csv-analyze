@@ -19,24 +19,26 @@ This program seeks to:
 
 ### Data Types
 
-  - [ ] Integer
-    - [ ] uint8
-    - [ ] uint16
-    - [ ] uint32
-    - [ ] uint64
-    - [ ] int8
-    - [ ] int16
-    - [ ] int32
-    - [ ] int64
-  - [ ] Floating Point
-    - [ ] float32
-    - [ ] float64
+  - [x] Integer
+    - [x] uint8
+    - [x] uint16
+    - [x] uint32
+    - [x] uint64
+    - [x] int8
+    - [x] int16
+    - [x] int32
+    - [x] int64
+  - [x] Floating Point
+    - [x] float32
+    - [x] float64
   - [ ] Timestamps
     - Formats TBD, but probably everything in the `time` package plus an Apache log format
   - [ ] Boolean
     - [ ] Y/N
     - [ ] yes/no
     - [ ] true/false
+    - [ ] t/f
+    - [ ] 1/0
   - [ ] Strings
     - [ ] Alpha
     - [ ] Alphanumeric

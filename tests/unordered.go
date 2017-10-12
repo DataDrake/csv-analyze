@@ -14,7 +14,9 @@
 // limitations under the License.
 //
 
-package test
+package tests
+
+import "io"
 
 // UnorderedTestGroup is a set of tests which may be run all at once
 type UnorderedTestGroup struct {
@@ -41,13 +43,13 @@ func (unordered *UnorderedTestGroup) Advance() {
 
 // Done checks if either all tests have been run
 func (unordered *UnorderedTestGroup) Done() bool {
-	return ordered.current >= len(ordered.tests)
+	return unordered.current >= len(unordered.tests)
 }
 
 // PrintResults will print the result for each of the tests
-func (unordered *UnorderedtestGroup) PrintResults() {
+func (unordered *UnorderedTestGroup) PrintResults(out io.Writer) {
 	for _, t := range unordered.tests {
-		t.PrintResult()
+		t.PrintResult(out)
 	}
 	return
 }

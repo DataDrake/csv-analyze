@@ -14,7 +14,9 @@
 // limitations under the License.
 //
 
-package test
+package tests
+
+import "io"
 
 // OrderedTestGroup is a set of tests which must be run sequentially
 type OrderedTestGroup struct {
@@ -49,11 +51,11 @@ func (ordered *OrderedTestGroup) Done() bool {
 }
 
 // PrintResults will print the result from the last test (if all passed) or the current failed test
-func (ordered *OrderedtestGroup) PrintResults() {
+func (ordered *OrderedTestGroup) PrintResults(out io.Writer) {
 	if l := len(ordered.tests); ordered.current >= l && l > 0 {
-		ordered.tests[l-1].PrintResult()
+		ordered.tests[l-1].PrintResult(out)
 		return
 	}
-	ordered.tests[ordered.current].PrintResult()
+	ordered.tests[ordered.current].PrintResult(out)
 	return
 }

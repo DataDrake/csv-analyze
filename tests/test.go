@@ -14,13 +14,15 @@
 // limitations under the License.
 //
 
-package test
+package tests
+
+import "io"
 
 // Test represents one of the various checks performed
 type Test interface {
 	Run(string)
 	Passed() bool
-	PrintResult()
+	PrintResult(io.Writer)
 }
 
 // Group is a set of related tests which may or may not depend o none another
@@ -28,5 +30,5 @@ type Group interface {
 	Run(string)
 	Advance()
 	Done() bool
-	PrintResults()
+	PrintResults(io.Writer)
 }
