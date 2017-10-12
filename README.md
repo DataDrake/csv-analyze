@@ -31,8 +31,8 @@ This program seeks to:
   - [x] Floating Point
     - [x] float32
     - [x] float64
-  - [ ] Timestamps
-    - Formats TBD, but probably everything in the `time` package plus an Apache log format
+  - [x] Timestamps
+    - Everything in the `time` package plus an Apache log format
   - [ ] Boolean
     - [ ] Y/N
     - [ ] yes/no
