@@ -33,12 +33,13 @@ This program seeks to:
     - [x] float64
   - [x] Timestamps
     - Everything in the `time` package plus an Apache log format
-  - [ ] Boolean
-    - [ ] Y/N
-    - [ ] yes/no
-    - [ ] true/false
-    - [ ] t/f
-    - [ ] 1/0
+  - [x] Boolean
+    - [x] Y/N
+    - [x] yes/no
+    - [x] true/false
+    - [x] t/f
+    - [x] 1/0
+    - [x] 1.0/0.0
   - [ ] Strings
     - [ ] Alpha
     - [ ] Alphanumeric

@@ -73,7 +73,7 @@ func TestNewTimeTestPrintResult(t *testing.T) {
 	buff.Reset()
 	tt.Run("2017-10-05T23:46:57-03:00")
 	tt.PrintResult(buff)
-	if buff.String() != fmt.Sprintf(timeResultFormat, []string{"RFC3339", "RFC3339Nano","Kitchen"}) {
+	if buff.String() != fmt.Sprintf(timeResultFormat, []string{"RFC3339", "RFC3339Nano", "Kitchen"}) {
 		t.Errorf("Should have been (RFC3339,RFC3339Nano,Kitchen), found: '%s'", buff.String())
 	}
 	buff.Reset()
