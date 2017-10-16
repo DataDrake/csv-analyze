@@ -16,7 +16,10 @@
 
 package tests
 
-import "io"
+import (
+	"encoding/csv"
+	"io"
+)
 
 // Test represents one of the various checks performed
 type Test interface {
@@ -25,10 +28,13 @@ type Test interface {
 	PrintResult(io.Writer)
 }
 
-// Group is a set of related tests which may or may not depend o none another
+// Group represents a series of related Tests to run
 type Group interface {
 	Run(string)
-	Advance()
-	Done() bool
-	PrintResults(io.Writer)
+	PrintResult(io.Writer)
+}
+
+// Suite runs one or more tests on a CSV file
+type Suite interface {
+	Run(*csv.Reader, io.Writer) error
 }
