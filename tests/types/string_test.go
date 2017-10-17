@@ -25,11 +25,11 @@ import (
 // TestNewStringTest verifies the starting state of an StringTest
 func TestNewStringTest(t *testing.T) {
 	st := NewStringTest().(*StringTest)
-	if !st.Passed() {
-		t.Error("Should have passed")
+	if st.Passed() {
+		t.Error("Should not have passed")
 	}
 	if st.max != 0 {
-		t.Error("'max' shoudl be 0")
+		t.Error("'max' should be 0")
 	}
 }
 
@@ -59,6 +59,11 @@ func TestNewStringTestPrintResult(t *testing.T) {
 	buff := bytes.NewBuffer(make([]byte, 10))
 	buff.Reset()
 	st := NewStringTest()
+	st.PrintResult(buff)
+	if buff.String() != fmt.Sprintf(stringResultFormat, "Fail", 0) {
+		t.Errorf("Should have been 'Fail' and '0', found: '%s'", buff.String())
+	}
+	buff.Reset()
 	st.Run("hello")
 	st.PrintResult(buff)
 	if buff.String() != fmt.Sprintf(stringResultFormat, "Alpha", 5) {

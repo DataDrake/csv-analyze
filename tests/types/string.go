@@ -77,11 +77,15 @@ func (s *StringTest) Run(cell string) {
 
 // Passed always returns true
 func (s *StringTest) Passed() bool {
-	return true
+	return s.max > 0
 }
 
 // PrintResult indicates either failure or the detected string class
 func (s *StringTest) PrintResult(out io.Writer) {
+	if !s.Passed() {
+		fmt.Fprintf(out, stringResultFormat, "Fail", s.max)
+		return
+	}
 	for _, class := range s.types {
 		if class.failed {
 			continue
