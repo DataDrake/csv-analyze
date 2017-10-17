@@ -14,7 +14,7 @@ This program seeks to:
 ### Checks
 
   - [ ] Missing columns
-  - [ ] Empty cells
+  - [x] Empty cells
   - More TBD
 
 ### Data Types
@@ -45,6 +45,11 @@ This program seeks to:
     - [x] Alphanumeric
     - [x] ASCII
     - [x] UTF-8
+
+### Uniqueness
+In addition to the previously described functionality, `csv-analyze` 
+also possesses the ability to tally the unique values found in a
+specific column.
 
 ### License
 Copyright 2017 Bryan T. Meyers <bmeyers@datadrake.com>
