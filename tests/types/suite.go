@@ -25,7 +25,7 @@ import (
 	"strings"
 )
 
-const columnFormat = "Results for Column [%d]:\n"
+const columnFormat = "\n\033[1mResults for Column [%d]:\033[21m\n"
 
 // Suite checks for empty cells
 type Suite struct {
@@ -60,8 +60,8 @@ func (t *Suite) Run(src *csv.Reader, dst io.Writer) (err error) {
 				t.groups[j].Run(strings.TrimSpace(cell))
 			}
 			i++
-        case io.EOF:
-            continue
+		case io.EOF:
+			continue
 		default:
 			err = errors.New("Failed to read next line, reason: " + err.Error())
 			return

@@ -23,7 +23,7 @@ import (
 	"regexp"
 )
 
-const stringResultFormat = "\tString: %v, Max Length: %v\n"
+const stringResultFormat = "\t%s, Max Length: %d\n"
 
 var alpha *regexp.Regexp
 var alphanumeric *regexp.Regexp

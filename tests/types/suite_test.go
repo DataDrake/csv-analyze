@@ -54,6 +54,6 @@ func TestNewSuiteRun2(t *testing.T) {
 	err := s.Run(src, dst)
 	if err != nil {
 		t.Error("There should not have been an error")
-        t.Error(err.Error())
+		t.Error(err.Error())
 	}
 }

@@ -22,11 +22,12 @@ import (
 	"io"
 )
 
-const groupFormat = "[%s]\n"
+const groupFormat = "\t\033[96m\033[4m%s\033[0m\n"
 
 // Group is a set of Type tests to run for a set of related values
 type Group struct {
 	tests map[string][]tests.Test
+	names []string
 }
 
 // NewGroup creates a new test group for the type tests
@@ -48,6 +49,7 @@ func NewGroup() tests.Group {
 				NewStringTest(),
 			},
 		},
+		[]string{"Numerical", "Logical", "DateTime", "String"},
 	}
 }
 
@@ -62,9 +64,9 @@ func (g *Group) Run(cell string) {
 
 // PrintResult writes out the results of the type tests
 func (g *Group) PrintResult(dst io.Writer) {
-	for name, ts := range g.tests {
+	for _, name := range g.names {
 		fmt.Fprintf(dst, groupFormat, name)
-		for _, t := range ts {
+		for _, t := range g.tests[name] {
 			t.PrintResult(dst)
 		}
 	}
