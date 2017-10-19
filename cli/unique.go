@@ -17,9 +17,6 @@
 package cli
 
 import (
-    "bufio"
-    "encoding/csv"
-	"fmt"
     "github.com/DataDrake/cli-ng/cmd"
     "github.com/DataDrake/csv-analyze/tests/unique"
 	"os"
@@ -42,16 +39,13 @@ type UniqueArgs struct {
 // UniqueRun carries out the search unique CSV values
 func UniqueRun(r *cmd.RootCMD, c *cmd.CMD) {
 	args := c.Args.(*UniqueArgs)
-    csvFile, err := os.Open(args.CSV)
-    if err != nil {
-        fmt.Printf("ERROR: failed to open file '%s', reason: %s\n", args.CSV, err.Error())
-        os.Exit(1)
+    file, decompressor, reader := OpenCSV(args.CSV)
+    if decompressor != nil {
+        defer decompressor.Close()
     }
-    defer csvFile.Close()
-    buff := bufio.NewReader(csvFile)
-    reader := csv.NewReader(buff)
+    defer file.Close()
     suite := unique.NewSuite()
-    err = suite.Run(reader, os.Stdout)
+    err := suite.Run(reader, os.Stdout)
     if err != nil {
         println(err.Error())
         os.Exit(1)
