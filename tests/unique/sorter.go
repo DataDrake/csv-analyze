@@ -17,8 +17,8 @@
 package unique
 
 type pair struct {
-    key   uint64
-    value string
+	key   uint64
+	value string
 }
 
 // Sorter sorts a set of key-value pairs by key
@@ -29,20 +29,20 @@ type Sorter struct {
 // NewSorter returns a fresh Sorter
 func NewSorter() *Sorter {
 	return &Sorter{
-		make([]*pair,0),
+		make([]*pair, 0),
 	}
 }
 
 // Insert adds a new item to the Sorter, using an insertion sort
 func (s *Sorter) Insert(key uint64, value string) (err error) {
-    p := &pair{key,value}
-    for i := 0; i < len(s.values); i++ {
-        if p.key >= s.values[i].key {
-            temp := s.values[i]
-            s.values[i] = p
-            p = temp
-        }
-    }
-    s.values = append(s.values, p)
+	p := &pair{key, value}
+	for i := 0; i < len(s.values); i++ {
+		if p.key >= s.values[i].key {
+			temp := s.values[i]
+			s.values[i] = p
+			p = temp
+		}
+	}
+	s.values = append(s.values, p)
 	return
 }
