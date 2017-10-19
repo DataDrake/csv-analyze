@@ -19,7 +19,6 @@ package cli
 import (
     "bufio"
     "encoding/csv"
-	"flag"
 	"fmt"
     "github.com/DataDrake/cli-ng/cmd"
     "github.com/DataDrake/csv-analyze/tests/validation"
@@ -31,26 +30,30 @@ var Empty = cmd.CMD{
 	Name:  "empty",
 	Alias: "E",
 	Short: "Check for empty cells in a CSV file",
-	Args:  EmptyArgs,
+	Args:  &EmptyArgs{},
 	Run:   EmptyRun,
 }
 
 // EmptyArgs contains the arguments for the "empty" subcommand
-var EmptyArgs = struct {
-	csv string `desc:"Path to a CSV file to analyze"`
-}{}
+type EmptyArgs struct {
+	CSV string `desc:"Path to a CSV file to analyze"`
+}
 
 // EmptyRun carries out the search for empty CSV cells
 func EmptyRun(r *cmd.RootCMD, c *cmd.CMD) {
-	fn := flag.Arg(1)
-    csvFile, err := os.Open(fn)
+    args := c.Args.(*EmptyArgs)
+    csvFile, err := os.Open(args.CSV)
     if err != nil {
-        fmt.Printf("ERROR: failed to open file '%s', reason: %s\n", fn, err.Error())
+        fmt.Printf("ERROR: failed to open file '%s', reason: %s\n", args.CSV, err.Error())
         os.Exit(1)
     }
     defer csvFile.Close()
     buff := bufio.NewReader(csvFile)
     reader := csv.NewReader(buff)
     suite := validation.NewEmptySuite()
-    suite.Run(reader, os.Stdout)
+    err = suite.Run(reader, os.Stdout)
+    if err != nil {
+        println(err.Error())
+        os.Exit(1)
+    }
 }

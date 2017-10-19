@@ -13,7 +13,7 @@ This program seeks to:
 
 ### Checks
 
-  - [ ] Missing columns
+  - [x] Missing columns
   - [x] Empty cells
   - More TBD
 

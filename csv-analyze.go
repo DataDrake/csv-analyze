@@ -33,13 +33,14 @@ func main() {
 	r := &cmd.RootCMD{
 		Name:  "csv-analyze",
 		Short: "A useful tool for discovering the contents of a CSV file",
-		Flags: flags,
+		Flags: &flags,
 	}
 
 	// Setup the Sub-Commands
 	r.RegisterCMD(&cmd.Help)
 	r.RegisterCMD(&cli.Empty)
 	r.RegisterCMD(&cli.Types)
+	r.RegisterCMD(&cli.Unique)
 
 	// Run the program
 	r.Run()

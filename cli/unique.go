@@ -21,27 +21,27 @@ import (
     "encoding/csv"
 	"fmt"
     "github.com/DataDrake/cli-ng/cmd"
-    "github.com/DataDrake/csv-analyze/tests/types"
+    "github.com/DataDrake/csv-analyze/tests/unique"
 	"os"
 )
 
-// Types reads the CSV file and determines the possible types
-var Types = cmd.CMD{
-	Name:  "types",
-	Alias: "T",
-	Short: "Try to determine the possible data types",
-	Args:  &TypesArgs{},
-	Run:   TypesRun,
+// Unique checks for unique values in a CSV file
+var Unique = cmd.CMD{
+	Name:  "unique",
+	Alias: "U",
+	Short: "Check for unique values in a CSV file",
+	Args:  &UniqueArgs{},
+	Run:   UniqueRun,
 }
 
-// TypesArgs contains the arguments for the "empty" subcommand
-type TypesArgs struct {
+// UniqueArgs contains the arguments for the "unique" subcommand
+type UniqueArgs struct {
 	CSV string `desc:"Path to a CSV file to analyze"`
 }
 
-// TypesRun carries out the type testing process
-func TypesRun(r *cmd.RootCMD, c *cmd.CMD) {
-	args := c.Args.(*TypesArgs)
+// UniqueRun carries out the search unique CSV values
+func UniqueRun(r *cmd.RootCMD, c *cmd.CMD) {
+	args := c.Args.(*UniqueArgs)
     csvFile, err := os.Open(args.CSV)
     if err != nil {
         fmt.Printf("ERROR: failed to open file '%s', reason: %s\n", args.CSV, err.Error())
@@ -50,7 +50,7 @@ func TypesRun(r *cmd.RootCMD, c *cmd.CMD) {
     defer csvFile.Close()
     buff := bufio.NewReader(csvFile)
     reader := csv.NewReader(buff)
-    suite := types.NewSuite(false)
+    suite := unique.NewSuite()
     err = suite.Run(reader, os.Stdout)
     if err != nil {
         println(err.Error())
