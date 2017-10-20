@@ -69,11 +69,11 @@ func (f *Suite) Run(src *csv.Reader, dst io.Writer) (err error) {
 	for i, counts := range f.values {
 		output := NewSorter()
 		for k, v := range counts {
-			output.Insert(v, k)
+			output.Add(v, k)
 		}
 		fmt.Fprintf(dst, uniqueColumnHeader, i)
-		for _, p := range output.values {
-			fmt.Fprintf(dst, uniqueResultFormat, p.value, p.key)
+		for _, e := range output.values {
+			fmt.Fprintf(dst, uniqueResultFormat, e.value, e.key)
 		}
 	}
 	return

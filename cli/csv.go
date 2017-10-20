@@ -51,5 +51,6 @@ func OpenCSV(filename string, delimiter string) (file *os.File, decompressor io.
         reader = csv.NewReader(buff)
     }
     reader.Comma = []rune(delimiter)[0]
+    reader.ReuseRecord = true
     return
 }

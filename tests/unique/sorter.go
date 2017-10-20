@@ -33,16 +33,8 @@ func NewSorter() *Sorter {
 	}
 }
 
-// Insert adds a new item to the Sorter, using an insertion sort
-func (s *Sorter) Insert(key uint64, value string) (err error) {
-	p := &pair{key, value}
-	for i := 0; i < len(s.values); i++ {
-		if p.key >= s.values[i].key {
-			temp := s.values[i]
-			s.values[i] = p
-			p = temp
-		}
-	}
-	s.values = append(s.values, p)
+// Add stores a new item in the Sorter
+func (s *Sorter) Add(key uint64, value string) {
+	s.values = append(s.values, &pair{key, value})
 	return
 }

@@ -39,12 +39,13 @@ type TypesArgs struct {
 // TypesRun carries out the type testing process
 func TypesRun(r *cmd.RootCMD, c *cmd.CMD) {
 	args := c.Args.(*TypesArgs)
-    file, decompressor, reader := OpenCSV(args.CSV, r.Flags.(*GlobalFlags).Delimiter)
+    gFlags := r.Flags.(*GlobalFlags)
+    file, decompressor, reader := OpenCSV(args.CSV, gFlags.Delimiter)
     if decompressor != nil {
         defer decompressor.Close()
     }
     defer file.Close()
-    suite := types.NewSuite(false)
+    suite := types.NewSuite(gFlags.SkipLabels)
     err := suite.Run(reader, os.Stdout)
     if err != nil {
         println(err.Error())
