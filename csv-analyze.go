@@ -17,31 +17,9 @@
 package main
 
 import (
-	"github.com/DataDrake/cli-ng/cmd"
 	"github.com/DataDrake/csv-analyze/cli"
 )
 
 func main() {
-
-	// Global Flags
-	flags := struct {
-        RowData    bool `short:"r" long:"row-data"    desc:"Data is in rows, not columns"`
-		SkipLabels bool `short:"s" long:"skip-labels" desc:"Skip the first row or column as labels"`
-	}{}
-
-	// Build Application
-	r := &cmd.RootCMD{
-		Name:  "csv-analyze",
-		Short: "A useful tool for discovering the contents of a CSV file",
-		Flags: &flags,
-	}
-
-	// Setup the Sub-Commands
-	r.RegisterCMD(&cmd.Help)
-	r.RegisterCMD(&cli.Empty)
-	r.RegisterCMD(&cli.Types)
-	r.RegisterCMD(&cli.Unique)
-
-	// Run the program
-	r.Run()
+	cli.Root.Run()
 }

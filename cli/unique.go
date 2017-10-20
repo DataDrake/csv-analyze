@@ -39,7 +39,7 @@ type UniqueArgs struct {
 // UniqueRun carries out the search unique CSV values
 func UniqueRun(r *cmd.RootCMD, c *cmd.CMD) {
 	args := c.Args.(*UniqueArgs)
-    file, decompressor, reader := OpenCSV(args.CSV)
+    file, decompressor, reader := OpenCSV(args.CSV, r.Flags.(*GlobalFlags).Delimiter)
     if decompressor != nil {
         defer decompressor.Close()
     }

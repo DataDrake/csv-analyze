@@ -39,7 +39,7 @@ type TypesArgs struct {
 // TypesRun carries out the type testing process
 func TypesRun(r *cmd.RootCMD, c *cmd.CMD) {
 	args := c.Args.(*TypesArgs)
-    file, decompressor, reader := OpenCSV(args.CSV)
+    file, decompressor, reader := OpenCSV(args.CSV, r.Flags.(*GlobalFlags).Delimiter)
     if decompressor != nil {
         defer decompressor.Close()
     }

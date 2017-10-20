@@ -39,7 +39,7 @@ type EmptyArgs struct {
 // EmptyRun carries out the search for empty CSV cells
 func EmptyRun(r *cmd.RootCMD, c *cmd.CMD) {
     args := c.Args.(*EmptyArgs)
-    file, decompressor, reader := OpenCSV(args.CSV)
+    file, decompressor, reader := OpenCSV(args.CSV, r.Flags.(*GlobalFlags).Delimiter)
     if decompressor != nil {
         defer decompressor.Close()
     }

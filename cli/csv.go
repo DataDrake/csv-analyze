@@ -28,7 +28,7 @@ import (
 )
 
 // OpenCSV opens a CSV file with buffered IO, handling bzip2 and gzip compression formats
-func OpenCSV(filename string) (file *os.File, decompressor io.ReadCloser, reader *csv.Reader) {
+func OpenCSV(filename string, delimiter string) (file *os.File, decompressor io.ReadCloser, reader *csv.Reader) {
     file, err := os.Open(filename)
     if err != nil {
         fmt.Printf("ERROR: failed to open file '%s', reason: %s\n", filename, err.Error())
@@ -50,5 +50,6 @@ func OpenCSV(filename string) (file *os.File, decompressor io.ReadCloser, reader
     default:
         reader = csv.NewReader(buff)
     }
+    reader.Comma = []rune(delimiter)[0]
     return
 }
