@@ -38,3 +38,41 @@ func (s *Sorter) Add(key uint64, value string) {
 	s.values = append(s.values, &pair{key, value})
 	return
 }
+
+func maxRadix(values *[]*pair, radix uint64) uint64 {
+    max := uint64(0)
+    for _,v := range *values {
+        if v.key > max {
+            max = v.key
+        }
+    }
+    for radix > max {
+        radix = (radix >> 1)
+    }
+    return radix
+}
+
+func radixSort(values *[]*pair, radix uint64) {
+    if len(*values) <= 1 || radix == 0 {
+        return
+    }
+    radix = maxRadix(values, radix)
+    left := make([]*pair,0)
+    right := make([]*pair,0)
+    for _,v := range *values {
+        if (v.key & radix) == 0 {
+            right = append(right, v)
+        } else {
+            left = append(left, v)
+        }
+    }
+    radixSort(&left, radix >> 1)
+    radixSort(&right, radix >> 1)
+    *values = append(left,right...)
+    return
+}
+
+// Sort performs a radix sort of the values
+func (s *Sorter) Sort() {
+    radixSort(&s.values, (1 << 63))
+}

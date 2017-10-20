@@ -71,6 +71,7 @@ func (f *Suite) Run(src *csv.Reader, dst io.Writer) (err error) {
 		for k, v := range counts {
 			output.Add(v, k)
 		}
+        output.Sort()
 		fmt.Fprintf(dst, uniqueColumnHeader, i)
 		for _, e := range output.values {
 			fmt.Fprintf(dst, uniqueResultFormat, e.value, e.key)
